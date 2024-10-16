@@ -50,6 +50,48 @@ class EvilCircle extends Shape {
     }
   });
   }
+
+  draw(){
+    ctx.beginPath();
+    ctx.strokeStyle = this.color;
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.lineWidth = 3; 
+  }
+
+  //Not sure if this is right
+  checkBounds(){
+    if (this.x + this.size >= width) {
+      this.x = -Math.abs(this.size);
+    }
+
+    if (this.x - this.size <= 0) {
+      this.x = Math.abs(this.size);
+    }
+
+    if (this.y + this.size >= height) {
+      this.y = -Math.abs(this.size);
+    }
+
+    if (this.y - this.size <= 0) {
+      this.y = Math.abs(this.size);
+    }
+
+  }
+
+  collisionDetect(){
+    for (const ball of balls) {
+      if ( ball.exists == true) {
+        const dx = this.x - ball.x;
+        const dy = this.y - ball.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < this.size + ball.size) {
+          ball.exists = false;
+        }
+      }
+    }
+  }
   
 }
 
