@@ -8,6 +8,7 @@ const height = (canvas.height = window.innerHeight);
 
 //Added variables for lab
 const p = document.getElementById("ballCount");
+const pWon = document.getElementById("wonGame");
 let count = 0;
 
 // function to generate random number
@@ -94,6 +95,9 @@ class EvilCircle extends Shape {
           ball.exists = false;
           count--; 
           p.textContent = "Ball count:" + count;
+        }
+        if(count == 0){
+          pWon.textContent = "Congratulations! You have collected all the balls. :)";
         }
       }
     }
